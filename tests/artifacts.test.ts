@@ -1,3 +1,5 @@
+import NodeAssert from "node:assert/strict";
+
 import { Schema } from "effect";
 import { describe, expect, it } from "vite-plus/test";
 
@@ -207,7 +209,10 @@ describe("harness release artifact reader", () => {
     expect(openedClaude.manifest.files[CLI_MODULE_PATH]?.bytes).toBe(
       claude.payload.byteLength
     );
-    expect(await openedClaude.read(CLI_MODULE_PATH)).toEqual(claude.payload);
+    NodeAssert.deepEqual(
+      await openedClaude.read(CLI_MODULE_PATH),
+      claude.payload
+    );
     expect(claude.reads).toContain(CLI_MODULE_PATH);
   });
 
@@ -381,7 +386,10 @@ describe("harness release artifact reader", () => {
     expect(opened.rawManifests.codex?.version).toBe("codex-test");
     await expectCode(opened.read(fixture.payloadPath), "FILE_HASH_MISMATCH");
     fixture.files.set(fixture.payloadPath, fixture.payload);
-    expect(await opened.read(fixture.payloadPath)).toEqual(fixture.payload);
+    NodeAssert.deepEqual(
+      await opened.read(fixture.payloadPath),
+      fixture.payload
+    );
   });
 
   it("shares concurrent payload reads, then rechecks bytes on later reads", async () => {
@@ -405,10 +413,13 @@ describe("harness release artifact reader", () => {
     expect(payloadReads).toBe(1);
     const [firstBytes, secondBytes] = await Promise.all([first, second]);
     firstBytes.fill(0);
-    expect(secondBytes).toEqual(fixture.payload);
+    NodeAssert.deepEqual(secondBytes, fixture.payload);
     expect(payloadReads).toBe(1);
 
-    expect(await opened.read(fixture.payloadPath)).toEqual(fixture.payload);
+    NodeAssert.deepEqual(
+      await opened.read(fixture.payloadPath),
+      fixture.payload
+    );
     expect(payloadReads).toBe(2);
   });
 });
