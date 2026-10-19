@@ -4,7 +4,6 @@ import * as NodeOS from "node:os";
 import NodePath from "node:path";
 
 import { Ajv } from "ajv";
-// @effect-diagnostics nodeBuiltinImport:off - verify immutable output in temporary test directories.
 import { describe, expect, it } from "vite-plus/test";
 
 import { scanClaudeReleaseInventory } from "./release-inventory.ts";

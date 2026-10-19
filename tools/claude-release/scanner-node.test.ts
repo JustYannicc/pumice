@@ -1,7 +1,6 @@
 import * as NodeChildProcess from "node:child_process";
 import * as NodeURL from "node:url";
 
-// @effect-diagnostics nodeBuiltinImport:off - exercise the scanner through Node's native TypeScript loader.
 import { describe, expect, it } from "vite-plus/test";
 
 describe("native Node scanner entry points", () => {

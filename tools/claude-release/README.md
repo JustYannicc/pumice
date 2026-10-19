@@ -15,3 +15,12 @@ pnpm scan:claude-release <extracted> <capabilities.json> <new-output-directory> 
 The new output directory receives `inventory.json` and `release-report.json`, plus `diff.json` when a baseline is supplied. Existing output directories are refused. Static findings leave execution checks pending until a runtime proof supplies their evidence.
 
 Use `pnpm test:claude-release` for the focused scanner tests and `pnpm typecheck:claude-release` to check the tool sources.
+
+Use the gitignored `.local/` directory for local provider inputs and outputs. Download and extract an official release, or extract a binary you already have:
+
+```sh
+node tools/claude-release/releases.ts .local/claude-releases latest linux-x64
+node tools/claude-release/extract.ts <binary> .local/claude-extracted
+```
+
+Keep provider binaries and extracted JavaScript local. The scanner accepts those paths without adding them to source or package contents.

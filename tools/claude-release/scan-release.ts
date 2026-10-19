@@ -1,4 +1,3 @@
-// @effect-diagnostics nodeBuiltinImport:off globalConsole:off - build-time release inventory and CLI diagnostics.
 import * as NodeFSP from "node:fs/promises";
 import NodePath from "node:path";
 import * as NodeURL from "node:url";

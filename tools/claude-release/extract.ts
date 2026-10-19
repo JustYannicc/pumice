@@ -1,4 +1,3 @@
-// @effect-diagnostics nodeBuiltinImport:off globalConsole:off - standalone Node extraction from official release artifacts.
 import * as NodeCrypto from "node:crypto";
 import * as NodeFS from "node:fs";
 import * as NodeFSP from "node:fs/promises";
@@ -150,7 +149,7 @@ if (
   const [binary, output] = process.argv.slice(2);
   if (!binary || !output) {
     throw new Error(
-      "Usage: node scripts/claude-bunfs/extract.ts <binary> <new-output-directory>"
+      "Usage: node tools/claude-release/extract.ts <binary> <new-output-directory>"
     );
   }
   const result = await extract(binary, output);

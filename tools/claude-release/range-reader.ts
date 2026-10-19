@@ -1,4 +1,3 @@
-// @effect-diagnostics globalFetch:off - the range reader runs directly in Node and workerd.
 import type { BinaryReader } from "./bun-container.ts";
 
 // Metadata and source text are laid out in runs. A bounded page cache avoids

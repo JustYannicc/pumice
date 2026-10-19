@@ -1,4 +1,3 @@
-// @effect-diagnostics nodeBuiltinImport:off - build-time verified extractor input.
 import * as NodeCrypto from "node:crypto";
 import * as NodeFSP from "node:fs/promises";
 import NodePath from "node:path";
