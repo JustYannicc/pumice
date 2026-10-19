@@ -1,0 +1,8 @@
+Pumice includes code derived from Signalbox, originally distributed under the
+MIT license in LICENSE.
+
+Source repository: https://github.com/JustYannicc/signalbox
+Source commit: cff9e7fe2f879b4cdf5523185f911967c6cbdc92
+
+The release artifact reader, preparation and release ledger retain their source
+contracts. The publication adapter accepts a caller-supplied store and key mapper.

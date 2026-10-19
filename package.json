@@ -1,0 +1,67 @@
+{
+  "name": "pumice",
+  "version": "0.1.0",
+  "description": "Runtime release verification and preparation for V8 isolates.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JustYannicc/pumice.git"
+  },
+  "homepage": "https://github.com/JustYannicc/pumice#readme",
+  "bugs": {
+    "url": "https://github.com/JustYannicc/pumice/issues"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "type": "module",
+  "exports": {
+    "./artifacts": {
+      "types": "./dist/artifacts.d.ts",
+      "import": "./dist/artifacts.js"
+    },
+    "./artifacts/node": {
+      "types": "./dist/artifacts-node.d.ts",
+      "import": "./dist/artifacts-node.js"
+    },
+    "./releases": {
+      "types": "./dist/releases.d.ts",
+      "import": "./dist/releases.js"
+    }
+  },
+  "scripts": {
+    "test": "vp test run",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "ultracite check src tests scripts vite.config.ts oxlint.config.ts oxfmt.config.ts",
+    "format": "ultracite fix src tests scripts vite.config.ts oxlint.config.ts oxfmt.config.ts",
+    "check:package": "node scripts/check-package.mjs",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "changeset publish",
+    "prepack": "pnpm run build"
+  },
+  "devDependencies": {
+    "@changesets/cli": "3.0.3",
+    "@types/node": "24.12.4",
+    "effect": "4.0.5",
+    "oxfmt": "0.70.0",
+    "oxlint": "1.86.0",
+    "typescript": "7.0.2",
+    "ultracite": "7.12.4",
+    "vite-plus": "1.0.0"
+  },
+  "peerDependencies": {
+    "effect": "4.0.5"
+  },
+  "engines": {
+    "node": ">=24.13.1"
+  },
+  "packageManager": "pnpm@11.28.6",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
