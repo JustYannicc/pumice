@@ -6,7 +6,10 @@ import {
   openHarnessReleaseArtifact,
   serializeHarnessReleaseArtifactManifest,
 } from "../artifacts.js";
-import type { HarnessReleaseArtifactIdentity } from "../artifacts.js";
+import type {
+  HarnessReleaseArtifactIdentity,
+  HarnessReleaseArtifactSource,
+} from "../artifacts.js";
 import { OwnedArtifactOutput } from "./prepareArtifact.output.js";
 import type { ArtifactFileSystem } from "./prepareArtifact.output.js";
 
@@ -139,7 +142,9 @@ const readSourceFile = async (
   }
 };
 
-export const artifactDirectorySource = (directory: string) => ({
+export const artifactDirectorySource = (
+  directory: string
+): HarnessReleaseArtifactSource => ({
   read: async (_reference: string, path: string) => {
     const root = await NodeFSP.realpath(directory);
     const absolute = await NodeFSP.realpath(NodePath.resolve(root, path));

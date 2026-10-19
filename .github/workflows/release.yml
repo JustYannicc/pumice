@@ -57,7 +57,7 @@ jobs:
 
   version:
     needs: [determine, verify]
-    if: github.ref == 'refs/heads/main' && needs.determine.outputs.mode == 'version' && !(github.event_name == 'workflow_dispatch' && needs.determine.outputs.package-exists == 'false')
+    if: github.ref == 'refs/heads/main' && needs.determine.outputs.mode == 'version'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -80,7 +80,7 @@ jobs:
 
   publish:
     needs: [determine, verify]
-    if: github.ref == 'refs/heads/main' && ((github.event_name == 'workflow_dispatch' && needs.determine.outputs.package-exists == 'false') || (needs.determine.outputs.mode == 'publish' && (github.event_name == 'workflow_dispatch' || needs.determine.outputs.package-exists == 'true')))
+    if: github.ref == 'refs/heads/main' && needs.determine.outputs.mode == 'publish' && needs.determine.outputs.package-exists == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment: npm
@@ -119,4 +119,4 @@ jobs:
           fi
       - name: Publish to npm
         if: steps.version.outputs.published == 'false'
-        run: npm publish --access public --provenance
+        run: pnpm run release

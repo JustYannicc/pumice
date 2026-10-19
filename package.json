@@ -40,7 +40,7 @@
     "check:package": "node scripts/check-package.mjs",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "changeset publish",
+    "release": "npm publish --access public --provenance",
     "prepack": "pnpm run build"
   },
   "devDependencies": {
