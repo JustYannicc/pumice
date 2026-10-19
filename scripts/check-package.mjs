@@ -14,7 +14,7 @@ const run = (command, args, cwd) =>
   execFileSync(command, args, { cwd, stdio: "inherit" });
 try {
   run("pnpm", ["pack", "--pack-destination", temporary], repository);
-  const archive = join(temporary, `pumice-${manifest.version}.tgz`);
+  const archive = join(temporary, `justyannicc-pumice-${manifest.version}.tgz`);
   await writeFile(
     join(temporary, "package.json"),
     JSON.stringify({
@@ -22,7 +22,7 @@ try {
       type: "module",
       packageManager: manifest.packageManager,
       dependencies: {
-        pumice: `file:${archive}`,
+        "@justyannicc/pumice": `file:${archive}`,
         effect: manifest.peerDependencies.effect,
       },
       devDependencies: {
@@ -33,16 +33,19 @@ try {
   );
   run("pnpm", ["install", "--ignore-scripts"], temporary);
   const installed = JSON.parse(
-    await readFile(join(temporary, "node_modules/pumice/package.json"), "utf-8")
+    await readFile(
+      join(temporary, "node_modules/@justyannicc/pumice/package.json"),
+      "utf-8"
+    )
   );
   assert.equal(installed.version, manifest.version);
-  assert.equal(installed.name, "pumice");
+  assert.equal(installed.name, "@justyannicc/pumice");
   await writeFile(
     join(temporary, "consumer.mts"),
     `
-import { openHarnessReleaseArtifact, type HarnessReleaseArtifactIdentity } from "pumice/artifacts";
-import { artifactDirectorySource, prepareHarnessArtifact, publishHarnessArtifact, type PrepareHarnessArtifactInput } from "pumice/artifacts/node";
-import { createHarnessReleaseLedger, type HarnessReleaseLedgerStore } from "pumice/releases";
+import { openHarnessReleaseArtifact, type HarnessReleaseArtifactIdentity } from "@justyannicc/pumice/artifacts";
+import { artifactDirectorySource, prepareHarnessArtifact, publishHarnessArtifact, type PrepareHarnessArtifactInput } from "@justyannicc/pumice/artifacts/node";
+import { createHarnessReleaseLedger, type HarnessReleaseLedgerStore } from "@justyannicc/pumice/releases";
 export const readPrepared = async (input: PrepareHarnessArtifactInput) => {
   const identity: HarnessReleaseArtifactIdentity = await prepareHarnessArtifact(input);
   return openHarnessReleaseArtifact(identity, artifactDirectorySource(input.output));
@@ -73,9 +76,9 @@ export { publishHarnessArtifact };
     `
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
-import { openHarnessReleaseArtifact } from "pumice/artifacts";
-import { artifactDirectorySource, prepareHarnessArtifact, publishHarnessArtifact } from "pumice/artifacts/node";
-import { REQUIRED_HARNESS_CHECKS } from "pumice/releases";
+import { openHarnessReleaseArtifact } from "@justyannicc/pumice/artifacts";
+import { artifactDirectorySource, prepareHarnessArtifact, publishHarnessArtifact } from "@justyannicc/pumice/artifacts/node";
+import { REQUIRED_HARNESS_CHECKS } from "@justyannicc/pumice/releases";
 await mkdir("input");
 await writeFile("input/manifest.json", '{"mainModule":"entry.wasm"}');
 const payload = Uint8Array.of(0, 97, 115, 109, 1, 0, 0, 0);
@@ -100,7 +103,7 @@ assert.equal(published.files, 2);
 const remote = await openHarnessReleaseArtifact(identity, { read: (reference, path) => store.read(key(reference, path)) });
 assert.deepEqual(await remote.read("codex/entry.wasm"), payload);
 assert.deepEqual([...REQUIRED_HARNESS_CHECKS], ["unchangedSource", "boot", "toolTurn", "resume", "mcp", "interrupt"]);
-await assert.rejects(import("pumice/internal/types"), { code: "ERR_PACKAGE_PATH_NOT_EXPORTED" });
+await assert.rejects(import("@justyannicc/pumice/internal/types"), { code: "ERR_PACKAGE_PATH_NOT_EXPORTED" });
 `
   );
   run(process.execPath, ["runtime.mjs"], temporary);

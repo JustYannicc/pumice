@@ -1,5 +1,5 @@
 {
-  "name": "pumice",
+  "name": "@justyannicc/pumice",
   "version": "0.1.0",
   "description": "Runtime release verification and preparation for V8 isolates.",
   "license": "MIT",

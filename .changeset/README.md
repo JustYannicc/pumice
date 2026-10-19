@@ -1,6 +1,6 @@
 # Changesets
 
-Add one Changeset for each user-facing package change. Run `pnpm changeset`, choose `pumice`, select the bump level, and describe the change in plain language. Commit the generated Markdown file with the code change.
+Add one Changeset for each user-facing package change. Run `pnpm changeset`, choose `@justyannicc/pumice`, select the bump level, and describe the change in plain language. Commit the generated Markdown file with the code change.
 
 - `patch` fixes behavior without changing the public API.
 - `minor` adds backwards-compatible public behavior.
