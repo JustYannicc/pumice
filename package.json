@@ -35,13 +35,16 @@
     "test": "vp test run",
     "typecheck": "tsc --noEmit",
     "build": "tsc -p tsconfig.build.json",
-    "lint": "ultracite check src tests scripts vite.config.ts oxlint.config.ts oxfmt.config.ts",
-    "format": "ultracite fix src tests scripts vite.config.ts oxlint.config.ts oxfmt.config.ts",
+    "lint": "ultracite check src tests scripts vite.config.ts oxlint.config.ts oxfmt.config.ts tools/claude-release",
+    "format": "ultracite fix src tests scripts vite.config.ts oxlint.config.ts oxfmt.config.ts tools/claude-release",
     "check:package": "node scripts/check-package.mjs",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "npm publish --access public --provenance",
-    "prepack": "pnpm run build"
+    "prepack": "pnpm run build",
+    "scan:claude-release": "node tools/claude-release/scan-release.ts",
+    "test:claude-release": "vp test run tools/claude-release --maxWorkers=2",
+    "typecheck:claude-release": "tsc --noEmit -p tools/claude-release/tsconfig.json"
   },
   "devDependencies": {
     "@changesets/cli": "3.0.3",
@@ -51,7 +54,9 @@
     "oxlint": "1.86.0",
     "typescript": "7.0.2",
     "ultracite": "7.12.4",
-    "vite-plus": "1.0.0"
+    "vite-plus": "1.0.0",
+    "typescript-legacy": "npm:typescript@6.0.3",
+    "ajv": "8.20.0"
   },
   "peerDependencies": {
     "effect": "4.0.5"

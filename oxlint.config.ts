@@ -15,5 +15,16 @@ export default defineConfig({
     "sort-keys": "off",
     "no-use-before-define": "off",
   },
+  overrides: [
+    {
+      files: ["tools/claude-release/**/*.ts"],
+      rules: {
+        // Keep the scanner's hoisted recursive visitors in their source form.
+        "func-style": "off",
+        // Binary layouts and TypeScript flags use integer masks.
+        "no-bitwise": "off",
+      },
+    },
+  ],
   extends: [core],
 });

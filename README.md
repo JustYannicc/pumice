@@ -16,6 +16,8 @@ pnpm add pumice effect@4.0.5
 
 The portable artifact reader is suitable for runtimes that can provide Web Crypto and a storage-backed `read` function. The preparation and publication helpers require Node.js. See the exported TypeScript types for the exact input and storage contracts.
 
+Repository tools for scanning extracted Claude Code releases live in [tools/claude-release](tools/claude-release/README.md).
+
 ## Releases
 
 Changesets creates a version pull request on `main`; merging it publishes the package with npm provenance. Automated publishing uses npm trusted publishing with the GitHub Actions `npm` environment. npm requires the package to exist before trusted publishing can be configured, so the initial package bootstrap must happen first. After that setup, run the release workflow manually on `main` to publish the current version, or let the normal Changesets flow publish later versions.
