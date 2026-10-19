@@ -4,14 +4,14 @@ Pumice prepares and verifies immutable runtime artifacts, and tracks which verif
 
 The package separates portable verification from Node.js filesystem and publication helpers:
 
-- `pumice/artifacts` opens an artifact through a byte-reading source and verifies its manifest and file hashes.
-- `pumice/artifacts/node` prepares artifacts from local provider directories and publishes their files to a storage adapter.
-- `pumice/releases` provides a transactional ledger for artifacts, verification proofs, and release selection.
+- `@justyannicc/pumice/artifacts` opens an artifact through a byte-reading source and verifies its manifest and file hashes.
+- `@justyannicc/pumice/artifacts/node` prepares artifacts from local provider directories and publishes their files to a storage adapter.
+- `@justyannicc/pumice/releases` provides a transactional ledger for artifacts, verification proofs, and release selection.
 
 Install Pumice and its Effect peer dependency:
 
 ```sh
-pnpm add pumice effect@4.0.5
+pnpm add @justyannicc/pumice effect@4.0.5
 ```
 
 The portable artifact reader is suitable for runtimes that can provide Web Crypto and a storage-backed `read` function. The preparation and publication helpers require Node.js. See the exported TypeScript types for the exact input and storage contracts.

@@ -43,7 +43,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if result="$(npm view pumice name --json 2>&1)"; then
+          if result="$(npm view @justyannicc/pumice name --json 2>&1)"; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
           else
             status=$?
@@ -104,14 +104,14 @@ jobs:
         run: |
           set -euo pipefail
           version="$(node -p "require('./package.json').version")"
-          if result="$(npm view "pumice@${version}" version --json 2>&1)"; then
+          if result="$(npm view "@justyannicc/pumice@${version}" version --json 2>&1)"; then
             echo "published=true" >> "$GITHUB_OUTPUT"
-            echo "pumice@${version} is already on npm; skipping publish."
+            echo "@justyannicc/pumice@${version} is already on npm; skipping publish."
           else
             status=$?
             if grep -q 'E404' <<<"$result"; then
               echo "published=false" >> "$GITHUB_OUTPUT"
-              echo "pumice@${version} is not on npm yet."
+              echo "@justyannicc/pumice@${version} is not on npm yet."
             else
               printf '%s\n' "$result" >&2
               exit "$status"
