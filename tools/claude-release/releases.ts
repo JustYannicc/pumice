@@ -130,7 +130,7 @@ if (
   ] = process.argv.slice(2);
   if (!directory) {
     throw new Error(
-      "Usage: node releases.ts <artifact-directory> [versions-comma-separated|latest] [platform]"
+      "Usage: node tools/claude-release/releases.ts <artifact-directory> [versions-comma-separated|latest] [platform]"
     );
   }
   let selected: string[];

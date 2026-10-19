@@ -19,6 +19,7 @@ Use `pnpm test:claude-release` for the focused scanner tests and `pnpm typecheck
 Use the gitignored `.local/` directory for local provider inputs and outputs. Download and extract an official release, or extract a binary you already have:
 
 ```sh
+mkdir -p .local
 node tools/claude-release/releases.ts .local/claude-releases latest linux-x64
 node tools/claude-release/extract.ts <binary> .local/claude-extracted
 ```
