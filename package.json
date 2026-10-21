@@ -1,6 +1,6 @@
 {
   "name": "@justyannicc/pumice",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Runtime release verification and preparation for V8 isolates.",
   "license": "MIT",
   "repository": {
