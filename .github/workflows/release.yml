@@ -120,3 +120,11 @@ jobs:
       - name: Publish to npm
         if: steps.version.outputs.published == 'false'
         run: pnpm run release
+      - name: Explain npm authentication failures
+        if: failure()
+        shell: bash
+        run: |
+          for logfile in "$HOME"/.npm/_logs/*debug*.log; do
+            [[ -f "$logfile" ]] || continue
+            awk '/ info using npm@/ || / info using node@/ || / verbose oidc /' "$logfile"
+          done
